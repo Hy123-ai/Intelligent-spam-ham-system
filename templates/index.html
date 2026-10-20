@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛡️ INTELLIGENT SPAM HAM SYSTEM Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cyber-cyan: #00d4ff;
+            --cyber-magenta: #ff00ff;
+            --cyber-green: #00ff88;
+            --cyber-red: #ff4757;
+            --dark-bg: #0a0a15;
+            --card-bg: rgba(15, 15, 35, 0.9);
+            --text-primary: #e8f4fd;
+            --text-secondary: #a0b3c5;
+            --white-text: #ffffff;
+        }
+
+        body {
+            font-family: 'Exo 2', sans-serif;
+            background: var(--dark-bg);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Cyber Grid Background */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0,212,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,212,255,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridScan 25s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes gridScan {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Floating Security Particles */
+        .security-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatSecurity 8s infinite linear;
+        }
+
+        @keyframes floatSecurity {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Main Container - FULL RESPONSIVE */
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header - Professional Cyber Terminal */
+        .cyber-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            width: 100%;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, var(--cyber-cyan), var(--cyber-magenta));
+            color: #000;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 10px 30px rgba(0,212,255,0.4);
+            margin-bottom: 1.5rem;
+            animation: badgeGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes badgeGlow {
+            0% { box-shadow: 0 10px 30px rgba(0,212,255,0.4); }
+            100% { box-shadow: 0 10px 30px rgba(255,0,255,0.6); }
+        }
+
+        .main-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--cyber-cyan) 0%, #ffffff 50%, var(--cyber-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.8rem;
+            letter-spacing: 3px;
+            text-shadow: 0 0 40px rgba(0,212,255,0.6);
+            line-height: 1.1;
+        }
+
+        .terminal-subtitle {
+            font-family: 'Roboto Mono', monospace;
+            font-size: clamp(0.95rem, 3vw, 1.3rem);
+            color: var(--cyber-green);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-shadow: 0 0 15px rgba(0,255,136,0.6);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Cards Container */
+        .cards-container {
+            width: 100%;
+            max-width: 650px;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        /* Input Card - Professional */
+        .input-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(0,212,255,0.25);
+            border-radius: 25px;
+            padding: clamp(2.5rem, 6vw, 4rem);
+            box-shadow: 
+                0 30px 80px rgba(0,0,0,0.6),
+                0 0 0 1px rgba(0,212,255,0.15);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .input-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, var(--cyber-cyan), var(--cyber-magenta), transparent);
+            animation: scanLine 4s linear infinite;
+        }
+
+        @keyframes scanLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .input-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--cyber-cyan);
+            margin-bottom: 1.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .message-input {
+            width: 100%;
+            min-height: clamp(140px, 25vw, 200px);
+            padding: 2rem 1.8rem;
+            border: 2px solid rgba(0,212,255,0.2);
+            border-radius: 18px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+            background: rgba(20, 20, 50, 0.7);
+            color: var(--white-text) !important;
+            resize: vertical;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(20px);
+            line-height: 1.6;
+        }
+
+        .message-input::placeholder {
+            color: var(--text-secondary) !important;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: var(--cyber-cyan);
+            box-shadow: 
+                0 0 0 4px rgba(0,212,255,0.2),
+                0 20px 50px rgba(0,212,255,0.25);
+            transform: translateY(-3px);
+        }
+
+        /* Scan Button - Professional */
+        .scan-btn {
+            width: 100%;
+            padding: clamp(1.4rem, 4vw, 1.8rem) 0;
+            background: linear-gradient(135deg, var(--cyber-cyan) 0%, #00aaff 50%, var(--cyber-magenta) 100%);
+            color: #000 !important;
+            border: none;
+            border-radius: 18px;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 
+                0 20px 50px rgba(0,212,255,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            margin-top: 1.5rem;
+        }
+
+        /* RESULT POPUP MODAL - BETTER READABLE TEXT */
+        .result-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            animation: modalFadeIn 0.4s ease;
+        }
+
+        .result-modal.show {
+            display: flex;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .result-popup {
+            background: linear-gradient(135deg, rgba(15,15,35,0.98), rgba(25,25,55,0.98));
+            backdrop-filter: blur(40px);
+            border-radius: 30px;
+            padding: clamp(3rem, 8vw, 5rem);
+            box-shadow: 
+                0 60px 150px rgba(0,0,0,0.9),
+                inset 0 0 0 1px rgba(255,255,255,0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 95%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: popupBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        @keyframes popupBounce {
+            0% {
+                opacity: 0;
+                transform: scale(0.6) rotate(-8deg) translateY(50px);
+            }
+            50% {
+                transform: scale(1.08) rotate(2deg);
+            }
+            70% {
+                transform: scale(0.98) rotate(-1deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0) translateY(0);
+            }
+        }
+
+        .result-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .result-icon {
+            font-size: clamp(5rem, 12vw, 7rem);
+            filter: drop-shadow(0 0 40px currentColor);
+            animation: resultIconPulse 2s infinite;
+        }
+
+        @keyframes resultIconPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.15) rotate(8deg); }
+        }
+
+        .result-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.6rem, 5vw, 2.8rem);
+            font-weight: 900;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            color: var(--white-text) !important;
+            text-shadow: 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        .result-subtitle {
+            font-family: 'Roboto Mono', monospace;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            color: var(--white-text) !important;
+            font-weight: 500;
+            letter-spacing: 1px;
+            max-width: 450px;
+            margin: 0 auto 2rem;
+            position: relative;
+            z-index: 2;
+            line-height: 1.7;
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        /* SPAM RESULT - WHITE TEXT */
+        .spam-result {
+            border: 3px solid rgba(255,71,87,0.6);
+            box-shadow: 
+                0 60px 150px rgba(255,71,87,0.25),
+                0 0 60px rgba(255,71,87,0.3),
+                inset 0 0 0 1px rgba(255,255,255,0.15);
+        }
+
+        .spam-result .result-icon {
+            color: var(--cyber-red) !important;
+            text-shadow: 0 0 40px var(--cyber-red);
+        }
+
+        .spam-result::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 6px;
+            background: linear-gradient(90deg, var(--cyber-red), transparent);
+            border-radius: 3px;
+            animation: threatPulse 1.5s infinite;
+            box-shadow: 0 0 20px var(--cyber-red);
+        }
+
+        /* HAM RESULT - WHITE TEXT */
+        .ham-result {
+            border: 3px solid rgba(0,255,136,0.6);
+            box-shadow: 
+                0 60px 150px rgba(0,255,136,0.25),
+                0 0 60px rgba(0,255,136,0.3),
+                inset 0 0 0 1px rgba(255,255,255,0.15);
+        }
+
+        .ham-result .result-icon {
+            color: var(--cyber-green) !important;
+            text-shadow: 0 0 40px var(--cyber-green);
+        }
+
+        .ham-result::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 160px;
+            height: 6px;
+            background: linear-gradient(90deg, var(--cyber-green), transparent);
+            border-radius: 3px;
+            animation: secureGlow 2.5s infinite;
+            box-shadow: 0 0 20px var(--cyber-green);
+        }
+
+        /* Original Text - PERFECT READABLE */
+        .original-text-box {
+            background: rgba(20,20,50,0.9) !important;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: left;
+            margin-bottom: 2.5rem;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 1.1rem;
+            max-height: 220px;
+            overflow-y: auto;
+            box-shadow: 
+                inset 0 2px 15px rgba(0,0,0,0.5),
+                0 10px 30px rgba(0,0,0,0.4);
+            color: var(--white-text) !important;
+            line-height: 1.6;
+        }
+
+        .original-text-box strong {
+            color: var(--cyber-cyan) !important;
+            display: block;
+            margin-bottom: 1.2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 0 0 10px var(--cyber-cyan);
+        }
+
+        /* Modal Close Button */
+        .modal-close-btn {
+            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+            color: var(--white-text) !important;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 1.2rem 3rem;
+            border-radius: 20px;
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            width: 100%;
+            box-shadow: 
+                0 15px 40px rgba(0,0,0,0.5),
+                inset 0 1px 0 rgba(255,255,255,0.2);
+            text-shadow: 0 0 10px rgba(255,255,255,0.3);
+        }
+
+        .modal-close-btn:hover {
+            background: linear-gradient(135deg, rgba(255,255,255,0.25), rgba(255,255,255,0.1));
+            transform: translateY(-4px);
+            box-shadow: 
+                0 25px 60px rgba(0,212,255,0.4),
+                inset 0 1px 0 rgba(255,255,255,0.3);
+            border-color: var(--cyber-cyan);
+            color: var(--cyber-cyan) !important;
+        }
+
+        /* Error Card */
+        .error-card {
+            background: linear-gradient(135deg, rgba(255,107,0,0.25), rgba(255,152,0,0.2));
+            border: 2px solid rgba(255,152,0,0.7);
+            color: var(--white-text) !important;
+            padding: clamp(2rem, 5vw, 3rem);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            font-family: 'Roboto Mono', monospace;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(255,152,0,0.4);
+            animation: errorShake 0.5s ease-in-out;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* PERFECT RESPONSIVE */
+        @media (max-width: 768px) {
+            .main-container { padding: 1.5rem 1rem; }
+            .cards-container { gap: 2rem; }
+            .input-card { padding: 2.5rem 2rem !important; }
+            .result-popup { padding: 2.5rem 2rem !important; }
+            .original-text-box { font-size: 1rem; padding: 1.5rem; }
+        }
+
+        @media (max-width: 480px) {
+            .main-container { padding: 1rem 0.8rem; }
+            .cyber-header { margin-bottom: 2rem; }
+            .input-card { padding: 2rem 1.5rem !important; border-radius: 20px; }
+            .message-input { min-height: 140px !important; padding: 1.5rem !important; }
+            .result-popup { 
+                padding: 2rem 1.5rem !important; 
+                border-radius: 20px; 
+                margin: 1rem; 
+            }
+            .result-title { letter-spacing: 2px !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cyber Background -->
+    <div class="cyber-grid"></div>
+    <div class="security-particles" id="particles"></div>
+
+    <div class="main-container">
+        <!-- Header -->
+        <div class="cyber-header">
+            <div class="security-badge">
+                <i class="fas fa-shield-halved"></i>
+                AI INTELLIGENT SPAM DETECTION
+                <i class="fas fa-brain"></i>
+            </div>
+            <h1 class="main-title">SPAM THREAT ANALYZER</h1>
+            <div class="terminal-subtitle">
+                Advanced Machine Learning | Real-time Cyber Threat Detection | 94.8% Accuracy
+            </div>
+        </div>
+
+        <div class="cards-container">
+            {% if error %}
+            <div class="error-card">
+                <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; color: #ff9800;"></i>
+                {{ error }}
+            </div>
+            {% endif %}
+
+            <!-- Input Form -->
+            <div class="input-card">
+                <div class="input-title">
+                    <i class="fas fa-terminal"></i>
+                    Message Analysis Terminal
+                </div>
+                <form action="/predict" method="post">
+                    <textarea 
+                        name="message" 
+                        class="message-input" 
+                        placeholder="📨 Paste suspicious message here for intelligent spam analysis...
+                        
+Examples:
+- 'Win $1000 now!'
+- 'Your account is suspended'
+- 'Click here for free gift'
+- Normal business emails..." 
+                        required
+                    >{{ original_text if original_text else '' }}</textarea>
+                    <button class="scan-btn" type="submit">
+                        <i class="fas fa-bolt"></i> EXECUTE THREAT SCAN
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- RESULT POPUP MODAL - PERFECT READABLE -->
+    {% if prediction %}
+    <div id="resultModal" class="result-modal show {{ 'spam-result' if prediction == 'Spam' else 'ham-result' }}">
+        <div class="result-popup {{ 'spam-result' if prediction == 'Spam' else 'ham-result' }}">
+            <div class="result-header">
+                <div class="result-icon">
+                    {% if prediction == 'Spam' %}
+                        🚨
+                    {% else %}
+                        ✅
+                    {% endif %}
+                </div>
+                <div class="result-title">
+                    {% if prediction == 'Spam' %}
+                        SPAM DETECTED
+                    {% else %}
+                        MESSAGE SECURE
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div class="result-subtitle">
+                {% if prediction == 'Spam' %}
+                    ⚠️ High-risk phishing/spam detected. Contains malicious patterns, suspicious links, or scam indicators. DO NOT CLICK ANY LINKS!
+                {% else %}
+                    🛡️ Message verified clean. No spam/phishing threats detected by advanced AI analysis. Safe to open.
+                {% endif %}
+            </div>
+
+            {% if original_text %}
+            <div class="original-text-box">
+                <strong>📄 Original Message Analyzed:</strong>
+                {{ original_text }}
+            </div>
+            {% endif %}
+
+            <button class="modal-close-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i> CLOSE ANALYSIS
+            </button>
+        </div>
+    </div>
+    {% endif %}
+
+    <script>
+        // Professional Security Particles
+        function createSecurityParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['#00d4ff', '#ff00ff', '#00ff88'];
+            
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.width = particle.style.height = (Math.random() * 4 + 1) + 'px';
+                particle.style.animationDuration = (Math.random() * 6 + 6) + 's';
+                particle.style.animationDelay = Math.random() * 4 + 's';
+                particle.style.boxShadow = `0 0 10px ${colors[Math.floor(Math.random() * colors.length)]}`;
+                container.appendChild(particle);
+            }
+        }
+
+        // Typing Effect for Title
+        function typeTitle() {
+            const title = document.querySelector('.main-title');
+            const text = 'SPAM THREAT ANALYZER';
+            title.textContent = '';
+            let i = 0;
+            
+            function type() {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, 120);
+                }
+            }
+            setTimeout(type, 800);
+        }
+
+        // Modal Controls
+        function closeModal() {
+            const modal = document.getElementById('resultModal');
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 400);
+            }
+        }
+
+        // Close modal on outside click
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('resultModal');
+            const popup = document.querySelector('.result-popup');
+            if (modal && popup && !popup.contains(e.target)) {
+                closeModal();
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Auto-focus textarea
+        window.addEventListener('load', () => {
+            createSecurityParticles();
+            typeTitle();
+            const textarea = document.querySelector('.message-input');
+            if (textarea) textarea.focus();
+        });
+    </script>
+</body>
+</html>

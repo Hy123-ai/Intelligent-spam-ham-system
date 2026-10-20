@@ -1,0 +1,13 @@
+# Virtual environment (Aapka folder 'myvenv' naam se hai)
+myvenv/
+venv/
+env/
+
+# Python cache & Jupyter checkpoints
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# System aur extra files
+.DS_Store
+Thumbs.db
